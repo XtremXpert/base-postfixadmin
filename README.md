@@ -1,6 +1,6 @@
 # Introducción
 
-Este repositorio alberga un *contenedor Docker* para montar PostfixAdmin, está automatizado en el Registry Hub de Docker [luispa/base-postfixadmin](https://registry.hub.docker.com/u/luispa/base-postfixadmin/) conectado con el el proyecto en [GitHub base-postfixadmin](https://github.com/LuisPalacios/base-postfixadmin)
+Este repositorio alberga un *contenedor Docker* para montar PostfixAdmin, está automatizado en el Registry Hub de Docker [luispa/base-postfixadmin](https://registry.hub.docker.com/u/luispa/base-postfixadmin/) conectado con el proyecto en [GitHub base-postfixadmin](https://github.com/LuisPalacios/base-postfixadmin)
 
 
 ## Ficheros
