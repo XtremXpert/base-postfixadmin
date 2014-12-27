@@ -4,24 +4,40 @@
 #
 #set -eux
 
-## Compruebo que tengo acceso a MySQL
+## Link con SQL
 #
 #
-if [ -z "${MYSQL_PORT_3306_TCP}" ]; then
-	echo >&2 "error: falta la variable MYSQL_PORT_3306_TCP"
-	echo >&2 "  Olvidaste --link un_contenedor_mysql:mysql ?"
+#if [ -z "${MYSQL_PORT_3306_TCP}" ]; then
+#	echo >&2 "error: falta la variable MYSQL_PORT_3306_TCP"
+#	echo >&2 "  Olvidaste --link un_contenedor_mysql:mysql ?"
+#	exit 1
+#fi
+#  La dirección IP del HOST donde reside MySQL se calcula automáticamente
+#mysqlLink="${MYSQL_PORT_3306_TCP#tcp://}"
+#mysqlHost=${mysqlLink%%:*}
+#mysqlPort=${mysqlLink##*:}
+
+## Usuario y password de root en el MYSQL Server
+#
+#  #Tiene que estar hecho el Link con el contenedor MySQL y desde él
+#  #averiguo la contraseña de root (MYSQL_ENV_MYSQL_ROOT_PASSWORD)
+#	#if [ "${SQL_ROOT}" = "root" ]; then	
+#	#	: ${SQL_ROOT_PASSWORD:=$MYSQL_ENV_MYSQL_ROOT_PASSWORD}
+#	#fi
+#
+if [ -z "${mysqlLink}" ]; then
+	echo >&2 "error: falta la variable mysqlLink"
 	exit 1
 fi
-mysqlLink="${MYSQL_PORT_3306_TCP#tcp://}"
-mysqlHost=${mysqlLink%%:*}
-mysqlPort=${mysqlLink##*:}
-
-## Consigo la contraseña de root desde el contenedor MySQL
-#
-: ${SQL_ROOT:="root"}
-if [ "${SQL_ROOT}" = "root" ]; then
-	: ${SQL_ROOT_PASSWORD:=$MYSQL_ENV_MYSQL_ROOT_PASSWORD}
+if [ -z "${mysqlHost}" ]; then
+	echo >&2 "error: falta la variable mysqlHost"
+	exit 1
 fi
+if [ -z "${mysqlPort}" ]; then
+	echo >&2 "error: falta la variable mysqlPort"
+	exit 1
+fi
+: ${SQL_ROOT:="root"}
 if [ -z "${SQL_ROOT_PASSWORD}" ]; then
 	echo >&2 "error: falta la variable MYSQL_ROOT_PASSWORD"
 	exit 1
