@@ -5,7 +5,8 @@ Este repositorio alberga un *contenedor Docker* para montar PostfixAdmin, está 
 
 ## Ficheros
 
-* **Dockerfile**: Para crear la base de un servicio PostfixAdmin
+* **Dockerfile**: Para crear la base de servicio.
+* **do.sh**: Para arrancar el contenedor creado con esta imagen.
 
 ## Instalación de la imagen
 
