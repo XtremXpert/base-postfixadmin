@@ -36,6 +36,19 @@ RUN dpkg-reconfigure locales
 #
 RUN echo "Europe/Madrid" > /etc/timezone; dpkg-reconfigure -f noninteractive tzdata
 
+# Workaround para el Timezone, en vez de montar el fichero en modo read-only:
+# 1) En el DOCKERFILE
+RUN mkdir -p /config/tz && mv /etc/timezone /config/tz/ && ln -s /config/tz/timezone /etc/
+# 2) En el Script entrypoint:
+#     if [ -d '/config/tz' ]; then
+#         dpkg-reconfigure -f noninteractive tzdata
+#         echo "Hora actual: `date`"
+#     fi
+# 3) Al arrancar el contenedor, montar el volumen, a contiuación un ejemplo:
+#     /Apps/data/tz:/config/tz
+# 4) Localizar la configuración:
+#     echo "Europe/Madrid" > /Apps/data/tz/timezone
+ 
 # Añado las extensiones PHP que necesita PostfixAdmin
 RUN /usr/local/bin/docker-php-ext-configure imap --with-imap-ssl --with-kerberos
 RUN /usr/local/bin/docker-php-ext-install mysqli imap mbstring
