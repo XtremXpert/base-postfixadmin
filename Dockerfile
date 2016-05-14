@@ -52,10 +52,10 @@ RUN curl --location https://downloads.sourceforge.net/project/postfixadmin/postf
 WORKDIR /root/postfixadmin
 
 
-ADD do.sh /do.sh
-RUN chmod +x /do.sh
-ENTRYPOINT ["/do.sh"]
+COPY config.php php.ini run.sh /
+
+RUN chmod +x /run.sh
 EXPOSE 80
-#
-# Si no se especifica nada se ejecutará php -S (web server embebido)
-CMD ["/usr/local/bin/php", "-c /usr/local/lib/php.ini -S 0.0.0.0:80"]
+
+CMD /run.sh
+
