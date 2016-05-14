@@ -43,22 +43,19 @@ RUN /usr/local/bin/docker-php-ext-install mysqli imap mbstring
 COPY php.ini /usr/local/lib/
 
 WORKDIR /root
-ADD https://downloads.sourceforge.net/project/postfixadmin/postfixadmin/postfixadmin-${VERSION}/${PFA_TARBALL} /root
 
-RUN tar xzf ${PFA_TARBALL} -C /tmp && mv /tmp/postfixadmin-$VERSION/* /root/postfixadmin \
+/ADD https://downloads.sourceforge.net/project/postfixadmin/postfixadmin/postfixadmin-${VERSION}/${PFA_TARBALL} /root
+
+RUN curl --location https://downloads.sourceforge.net/project/postfixadmin/postfixadmin/postfixadmin-${VERSION}/postfixadmin-${VERSION}.tar.gz \
+    && tar xzf ${PFA_TARBALL} -C /tmp && mv /tmp/postfixadmin-$VERSION/* /root/postfixadmin \
 
 WORKDIR /root/postfixadmin
 
-#-----------------------------------------------------------------------------------
-#-----------------------------------------------------------------------------------
 
-# Ejecutar siempre al arrancar el contenedor este script
-#
 ADD do.sh /do.sh
 RUN chmod +x /do.sh
 ENTRYPOINT ["/do.sh"]
-
+EXPOSE 80
 #
 # Si no se especifica nada se ejecutará php -S (web server embebido)
 CMD ["/usr/local/bin/php", "-c /usr/local/lib/php.ini -S 0.0.0.0:80"]
-
