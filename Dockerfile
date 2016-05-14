@@ -44,7 +44,7 @@ COPY php.ini /usr/local/lib/
 
 WORKDIR /root
 
-/ADD https://downloads.sourceforge.net/project/postfixadmin/postfixadmin/postfixadmin-${VERSION}/${PFA_TARBALL} /root
+#ADD https://downloads.sourceforge.net/project/postfixadmin/postfixadmin/postfixadmin-${VERSION}/${PFA_TARBALL} /root
 
 RUN curl --location https://downloads.sourceforge.net/project/postfixadmin/postfixadmin/postfixadmin-${VERSION}/postfixadmin-${VERSION}.tar.gz \
     && tar xzf ${PFA_TARBALL} -C /tmp && mv /tmp/postfixadmin-$VERSION/* /root/postfixadmin \
