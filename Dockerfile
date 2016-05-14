@@ -46,13 +46,8 @@ WORKDIR /root
 
 #ADD https://downloads.sourceforge.net/project/postfixadmin/postfixadmin/postfixadmin-${VERSION}/${PFA_TARBALL} /root
 
-RUN curl --location https://downloads.sourceforge.net/project/postfixadmin/postfixadmin/postfixadmin-${VERSION}/postfixadmin-${VERSION}.tar.gz \
-    && tar xzf ${PFA_TARBALL} -C /tmp && mv /tmp/postfixadmin-$VERSION/* /root/postfixadmin \
-
-WORKDIR /root/postfixadmin
-
-
-COPY config.php php.ini run.sh /
+RUN curl --location https://downloads.sourceforge.net/project/postfixadmin/postfixadmin/postfixadmin-${VERSION}/postfixadmin-${VERSION}.tar.gz | tar xzf - \
+ && mv postfixadmin* /www
 
 RUN chmod +x /run.sh
 EXPOSE 80
