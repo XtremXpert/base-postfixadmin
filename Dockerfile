@@ -21,6 +21,8 @@ RUN apt-get update \
         libc-client2007e-dev \
         libkrb5-dev \
         openssl \
+        python-pip \
+    && pip install envtpl \
     && rm -rf /var/lib/apt/lists/* \
     && PFA_TARBALL="postfixadmin-${VERSION}.tar.gz" \
     && locale-gen fr_CA.UTF-8 \
