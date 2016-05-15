@@ -3,7 +3,7 @@
 cmd_php="php -S 0.0.0.0:80 -c php.ini -t /www"
 
 wait_for_mysql() {
-  until mysql --host=$MYSQL_HOST --user=$MYSQL_USER --password=$MYSQL_PASSWORD --execute="USE $MYSQL_DATABASE;" &>/dev/null; do
+  until mysql --host=$DBHOST --user=$DBUSER --password=$DBPASS --execute="USE $DBNAME;" &>/dev/null; do
     echo "waiting for mysql to start..."
     sleep 2
   done
