@@ -42,10 +42,10 @@ RUN /usr/local/bin/docker-php-ext-install mysqli imap mbstring
 COPY rootfs /
 
 #ADD https://downloads.sourceforge.net/project/postfixadmin/postfixadmin/postfixadmin-${VERSION}/${PFA_TARBALL} /root
-WORKDIR /var
+WORKDIR /tmp
 
 RUN curl --location https://downloads.sourceforge.net/project/postfixadmin/postfixadmin/postfixadmin-${VERSION}/postfixadmin-${VERSION}.tar.gz | tar xzf - \
-    && mv postfixadmin-${VERSION} www \
+    && mv /tmp/postfixadmin-${VERSION} /var/www \
     && chmod +x /usr/local/bin/startup
 
 WORKDIR /
