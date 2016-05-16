@@ -1,10 +1,10 @@
 <?php
 $CONF['configured'] = true;
 $CONF['database_type'] = 'mysqli';
-$CONF['database_host'] = {{ DBHOST }};
-$CONF['database_user'] = {{ DBUSER }};
-$CONF['database_password'] = {{ DBPASS }};
-$CONF['database_name'] = {{ DBNAME }};
+$CONF['database_host'] = '{{ DBHOST }}';
+$CONF['database_user'] = '{{ DBUSER }}';
+$CONF['database_password'] = '{{ DBPASS }}';
+$CONF['database_name'] = '{{ DBNAME }}';
 $CONF['default_aliases'] = array (
     'abuse' => 'admin',
     'hostmaster' => 'admin',
@@ -12,3 +12,5 @@ $CONF['default_aliases'] = array (
     'webmaster' => 'admin'
 );
 $CONF['show_footer_text'] = 'NO';
+$CONF['default_language'] = 'fr';
+$CONF['smtp_server'] = '{{ SMTPHOST }}';
