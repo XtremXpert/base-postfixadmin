@@ -23,7 +23,7 @@ _envtpl() {
 }
 
 init_config() {
-  _envtpl /var/www/config.local.php
+  _envtpl /postfixadmin/config.local.php
 }
 
 init_db() {
