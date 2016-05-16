@@ -26,7 +26,8 @@ RUN apt-get update \
     && locale-gen en_US.UTF-8 \
     && dpkg-reconfigure locales
 
-#RUN echo "America/Toronto" > /etc/timezone; dpkg-reconfigure -f noninteractive tzdata
+RUN echo "America/Toronto" > /etc/timezone; dpkg-reconfigure -f noninteractive tzdata
+
 #RUN mkdir -p /config/tz && mv /etc/timezone /config/tz/ && ln -s /config/tz/timezone /etc/
 
 #     if [ -d '/config/tz' ]; then
