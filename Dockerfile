@@ -2,11 +2,8 @@ FROM php:5.6
 
 MAINTAINER Benoît "XtremXpert" Vézina <xtremxpert@xtremxpert.com>
 
-ARG VERSION=2.93
-ARG GPG_Goodwin="2D83 3163 D69B B8F6 BFEF  179D 4ECC 3566 EB7E B945"
-
-ENV GID=991 \
-    UID=991 \
+ENV VERSION=2.93 \
+    GPG_Goodwin="2D83 3163 D69B B8F6 BFEF  179D 4ECC 3566 EB7E B945" \
     DBHOST=mariadb \
     DBUSER=postfix \
     DBNAME=postfix \
@@ -45,11 +42,11 @@ RUN /usr/local/bin/docker-php-ext-install mysqli imap mbstring
 COPY rootfs /
 
 #ADD https://downloads.sourceforge.net/project/postfixadmin/postfixadmin/postfixadmin-${VERSION}/${PFA_TARBALL} /root
-
+WORKDIR /tmp
 RUN curl --location https://downloads.sourceforge.net/project/postfixadmin/postfixadmin/postfixadmin-${VERSION}/postfixadmin-${VERSION}.tar.gz | tar xzf - \
-    && mv postfixadmin* /var/www \
-    && chmod +x /usr/local/bin/run.sh
+    && mv postfixadmin-${VERSION} /var/www \
+    && chmod +x /usr/local/bin/statup
 
 EXPOSE 80
 
-CMD run.sh
+CMD startup
