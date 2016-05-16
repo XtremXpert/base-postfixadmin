@@ -45,7 +45,7 @@ COPY rootfs /
 WORKDIR /tmp
 RUN curl --location https://downloads.sourceforge.net/project/postfixadmin/postfixadmin/postfixadmin-${VERSION}/postfixadmin-${VERSION}.tar.gz | tar xzf - \
     && mv postfixadmin-${VERSION} /var/www \
-    && chmod +x /usr/local/bin/statup
+    && chmod +x /usr/local/bin/startup
 
 EXPOSE 80
 
