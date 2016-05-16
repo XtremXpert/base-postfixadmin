@@ -34,7 +34,7 @@ init_db() {
   password_hash=$(echo -n "$salt:$SETUPPASS" | sha1sum | cut -d ' ' -f 1)
   setup_password_hash="$salt:$password_hash"
   echo "\$CONF['setup_password'] = '$setup_password_hash';">>/postfixadmin/config.local.php
-  curl --silent  --output /dev/null --data "form=createadmin&setup_password=$SETUPPASS&username=$ADMNAME&password=$ADMPASS&password2=$ADMIN_PASSWORD" http://localhost/setup.php
+  curl --silent  --output /dev/null --data "form=createadmin&setup_password=$SETUPPASS&username=$ADMNAME&password=$ADMPASS&password2=$ADMPASS" http://localhost/setup.php
   kill $pid_php
   wait $pid_php 2>/dev/null
 }
