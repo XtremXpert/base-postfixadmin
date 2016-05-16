@@ -30,12 +30,11 @@ init_db() {
   $cmd_php &
   wait_for_php
   pid_php=$!
-  setup_password="s3cr3t";
   salt=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 32 | head -n 1)
-  password_hash=$(echo -n "$salt:$setup_password" | sha1sum | cut -d ' ' -f 1)
+  password_hash=$(echo -n "$salt:$SETUPPASS" | sha1sum | cut -d ' ' -f 1)
   setup_password_hash="$salt:$password_hash"
-  echo "<?php \$CONF['setup_password'] = '$setup_password_hash';">>/postfixadmin/config.inc.php
-  curl --silent  --output /dev/null --data "form=createadmin&setup_password=$setup_password&username=$ADMIN_USERNAME&password=$ADMIN_PASSWORD&password2=$ADMIN_PASSWORD" http://localhost/setup.php
+  echo "<?php \$CONF['setup_password'] = '$setup_password_hash';">>/postfixadmin/config.local.php
+  curl --silent  --output /dev/null --data "form=createadmin&setup_password=$SETUPPASS&username=$ADMNAME&password=$ADMPASS&password2=$ADMIN_PASSWORD" http://localhost/setup.php
   kill $pid_php
   wait $pid_php 2>/dev/null
 }
