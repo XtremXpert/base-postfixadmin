@@ -16,17 +16,14 @@ wait_for_php() {
   done
 }
 
+# Replace {{ ENV }} vars
+_envtpl() {
+  mv "$1" "$1.tpl" # envtpl requires files to have .tpl extension
+  envtpl "$1.tpl"
+}
+
 init_config() {
-  cat config.php>/www/config.local.php
-  echo "<?php">/config/__config.php
-  for e in $(env); do
-    case $e in
-      PA_*)
-        e1=$(expr "$e" : 'PA_\([A-Z_]*\)')
-        e2=$(expr "$e" : '\([A-Z_]*\)')
-        echo "\$CONF['${e1,,}'] = getenv('$e2');">>/config/__config.php
-    esac
-  done
+  _envtpl /var/www/config.local.php
 }
 
 init_db() {
@@ -41,7 +38,6 @@ init_db() {
   curl --silent  --output /dev/null --data "form=createadmin&setup_password=$setup_password&username=$ADMIN_USERNAME&password=$ADMIN_PASSWORD&password2=$ADMIN_PASSWORD" http://localhost/setup.php
   kill $pid_php
   wait $pid_php 2>/dev/null
-  rm -rf /www/setup.php /config/___setup_password.php
 }
 
 wait_for_mysql
