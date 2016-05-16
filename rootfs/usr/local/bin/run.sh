@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cmd_php="php -S 0.0.0.0:80 -c php.ini -t /www"
+cmd_php="php -S 0.0.0.0:80 -c php.ini -t /var/www"
 
 wait_for_mysql() {
   until mysql --host=$DBHOST --user=$DBUSER --password=$DBPASS --execute="USE $DBNAME;" &>/dev/null; do
