@@ -39,16 +39,15 @@ RUN apt-get update \
 RUN /usr/local/bin/docker-php-ext-configure imap --with-imap-ssl --with-kerberos
 RUN /usr/local/bin/docker-php-ext-install mysqli imap mbstring
 
-COPY rootfs /
 
 #ADD https://downloads.sourceforge.net/project/postfixadmin/postfixadmin/postfixadmin-${VERSION}/${PFA_TARBALL} /root
-WORKDIR /tmp
 
 RUN curl --location https://downloads.sourceforge.net/project/postfixadmin/postfixadmin/postfixadmin-${VERSION}/postfixadmin-${VERSION}.tar.gz | tar xzf - \
-    && mv /tmp/postfixadmin-${VERSION} /var/www \
-    && chmod +x /usr/local/bin/startup
+    && mv /postfixadmin-${VERSION} /postfixadmin
 
-WORKDIR /
+COPY rootfs /
+
+RUN chmod +x /usr/local/bin/startup
 
 EXPOSE 80
 
