@@ -4,6 +4,9 @@ MAINTAINER Benoît "XtremXpert" Vézina <xtremxpert@xtremxpert.com>
 
 ENV VERSION=2.93 \
     GPG_Goodwin="2D83 3163 D69B B8F6 BFEF  179D 4ECC 3566 EB7E B945" \
+    ADMNAME=admin \
+    ADMPASS=S3cr3t \
+    SETUPPASS= S3cr3t \
     DBHOST=mariadb \
     DBUSER=postfix \
     DBNAME=postfix \
@@ -39,7 +42,6 @@ RUN echo "America/Toronto" > /etc/timezone; dpkg-reconfigure -f noninteractive t
  
 RUN /usr/local/bin/docker-php-ext-configure imap --with-imap-ssl --with-kerberos
 RUN /usr/local/bin/docker-php-ext-install mysqli imap mbstring
-
 
 #ADD https://downloads.sourceforge.net/project/postfixadmin/postfixadmin/postfixadmin-${VERSION}/${PFA_TARBALL} /root
 
