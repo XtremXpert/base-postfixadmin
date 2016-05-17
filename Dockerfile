@@ -4,7 +4,7 @@ MAINTAINER Benoît "XtremXpert" Vézina <xtremxpert@xtremxpert.com>
 
 ENV VERSION=2.93 \
     GPG_Goodwin="2D83 3163 D69B B8F6 BFEF  179D 4ECC 3566 EB7E B945" \
-    ADMNAME=admin \
+    ADMNAME=admin@changeme \
     ADMPASS=S3cr3t \
     SETUPPASS=S3cr3t \
     DBHOST=mariadb \
